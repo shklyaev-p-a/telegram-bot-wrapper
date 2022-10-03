@@ -9,16 +9,15 @@ use BotWrapper\Chaining\OnBot;
 
 class BotFactory
 {
+    private $token;
     private $commands;
     private $queries;
     private $actions;
     private $messages;
 
-    public function setToken(string $token): BotFactory
+    public function token(string $token): BotFactory
     {
-        $bot = \BotWrapper\Bot::getInstance();
-        $bot->init($token);
-
+        $this->token = $token;
         return $this;
     }
 
@@ -46,8 +45,11 @@ class BotFactory
         return $this;
     }
 
-    public function create()
+    public function create(): void
     {
+        $bot = \BotWrapper\Bot::getInstance();
+        $bot->init($this->token);
+
         $handler = new HandlerContainer();
         $handler->addHandler(new CommandBot($this->commands));
         $handler->addHandler(new CallbackQueryBot($this->queries));
