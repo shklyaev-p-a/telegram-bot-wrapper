@@ -1,23 +1,69 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
+use BotWrapper\BotFactory;
 
 final class BotFactoryTest extends TestCase
 {
-    public function setTokenTest()
+    public function testSetToken()
     {
-        $botFactory = $this->makePropertyToVisible(\BotWrapper\BotFactory::class, 'token');
+        $token = rand(5, 25);
+        $factory = new BotFactory();
 
-        $botFactory = $botFactory->token('123');
-        self::assertEquals(123, $botFactory->token);
+        $result = $factory->token($token);
+        $this->assertInstanceOf(BotFactory::class, $result);
+        $this->assertEquals($token, $factory->token);
     }
 
-    private function makePropertyToVisible($class, $property)
+    public function testSetCommands()
     {
-        $reflectionClass = new \ReflectionClass($class);
-        $reflectionProperty = $reflectionClass->getProperty($property);
-        $reflectionProperty->setAccessible(true);
+        $commands = [
+          stdClass::class
+        ];
 
-        return $reflectionClass->newInstanceWithoutConstructor();
+        $factory = new BotFactory();
+
+        $result = $factory->commands($commands);
+        $this->assertInstanceOf(BotFactory::class, $result);
+        $this->assertEquals($commands, $factory->commands);
+    }
+
+    public function testSetQueries()
+    {
+        $queries = [
+            stdClass::class
+        ];
+
+        $factory = new BotFactory();
+
+        $result = $factory->queries($queries);
+        $this->assertInstanceOf(BotFactory::class, $result);
+        $this->assertEquals($queries, $factory->queries);
+    }
+
+    public function testSetActions()
+    {
+        $actions = [
+            stdClass::class
+        ];
+
+        $factory = new BotFactory();
+
+        $result = $factory->actions($actions);
+        $this->assertInstanceOf(BotFactory::class, $result);
+        $this->assertEquals($actions, $factory->actions);
+    }
+
+    public function testSetMessages()
+    {
+        $messages = [
+            stdClass::class
+        ];
+
+        $factory = new BotFactory();
+
+        $result = $factory->messages($messages);
+        $this->assertInstanceOf(BotFactory::class, $result);
+        $this->assertEquals($messages, $factory->messages);
     }
 }

@@ -9,11 +9,11 @@ use BotWrapper\Chaining\OnBot;
 
 class BotFactory
 {
-    private $token;
-    private $commands;
-    private $queries;
-    private $actions;
-    private $messages;
+    public $token;
+    public $commands;
+    public $queries;
+    public $actions;
+    public $messages;
 
     public function token(string $token): BotFactory
     {
