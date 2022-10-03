@@ -2,25 +2,40 @@
 
 namespace BotWrapper;
 
+use BotWrapper\Exceptions\BotAlreadyInitException;
+use BotWrapper\Exceptions\EmptyBotException;
 use TelegramBot\Api\Client;
 
+/**
+ * Class Bot
+ * @package BotWrapper
+ */
 class Bot
 {
+    /** @var Client $bot | null */
     private $bot = null;
 
+    /** @var Bot | null */
     private static $_instance = null;
 
+    /**
+     * Bot constructor.
+     */
     private function __construct()
     {
-        //
     }
 
+    /**
+     *
+     */
     protected function __clone()
     {
-        //
     }
 
-    static public function getInstance()
+    /**
+     * @return Bot
+     */
+    static public function getInstance(): Bot
     {
         if (is_null(self::$_instance)) {
             self::$_instance = new self();
@@ -29,35 +44,76 @@ class Bot
         return self::$_instance;
     }
 
-    public function init(String $token)
+    /**
+     * @param String $token
+     * @throws BotAlreadyInitException
+     */
+    public function init(String $token): void
     {
         if (!is_null($this->bot)) {
-            throw new \Exception('bot init. use reInit method');
+            throw new BotAlreadyInitException();
         }
 
-        $this->bot = new Client($token);
+        $this->setBot($token);
     }
 
-    public function reInit(String $token)
+    /**
+     * @param String $token
+     */
+    public function override(String $token): void
     {
-        $this->bot = new Client($token);
+        $this->setBot($token);
     }
 
-    public function addAdditionalProperty($name, $property)
+    /**
+     * @param $name
+     * @param $property
+     * @throws \Exception
+     */
+    public function addAdditionalProperty($name, $property): void
     {
-        if (!property_exists($name)) {
-            $this->bot->{$name} = $property;
-        } else {
+        if (property_exists($this->bot, $name)) {
             throw new \Exception('This property already exists');
         }
+
+        $this->getBot()->{$name} = $property;
     }
 
-    public function get()
+    /**
+     * @return Client
+     * @throws \Exception
+     */
+    public function get(): Client
     {
-        if ($this->bot) {
-            return $this->bot;
-        } else {
-            throw new \Exception('Not bot init. Use init method for bot first configuration');
+        if (!$this->getBot()) {
+            throw new EmptyBotException();
         }
+
+        return $this->getBot();
+    }
+
+    /**
+     * @param string $token
+     * @return Client
+     */
+    public function createClient(string $token): Client
+    {
+        return new Client($token);
+    }
+
+    /**
+     * @param string $token
+     */
+    private function setBot(string $token): void
+    {
+        $this->bot = $this->createClient($token);
+    }
+
+    /**
+     * @return Client|null
+     */
+    private function getBot()
+    {
+        return $this->bot;
     }
 }
