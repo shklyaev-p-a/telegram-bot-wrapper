@@ -1,6 +1,6 @@
 <?php
 
-namespace BotWrapper\Chaining;
+namespace BotWrapper\Chaining\Links;
 
 use BotWrapper\Bot;
 use BotWrapper\Chaining\Interfaces\BotInterface;
@@ -24,7 +24,10 @@ class CallbackQueryBot implements BotInterface
 
         $bot->callbackQuery(function ($message) use (/* @var BotApi $bot */ $bot) {
             foreach ($this->queries as $query) {
-                //Перебор команд и поиск подходящей
+                $model = new $query();
+                if ($model->signature === $message->getData()) {
+                    $model->make($bot, $message);
+                }
             }
         });
     }

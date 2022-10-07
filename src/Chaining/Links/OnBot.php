@@ -1,9 +1,10 @@
 <?php
 
-namespace BotWrapper\Chaining;
+namespace BotWrapper\Chaining\Links;
 
 use BotWrapper\Bot;
 use BotWrapper\Chaining\Interfaces\BotInterface;
+use BotWrapper\Factories\MatcherFactory;
 use TelegramBot\Api\Types\Update;
 
 class OnBot implements BotInterface
@@ -28,14 +29,16 @@ class OnBot implements BotInterface
             $message = $update->getMessage();
 
             if (method_exists($message, 'getFrom')) {
-
+                //Продумать алгоритм lastAction
             }
 
             if (method_exists($message, 'getText')) {
-                if(array_key_exists($message->getText(), $this->messages)){
-                    $action = $this->messages[$message->getText()];
-                    $action = new $action();
-                    $action->message($bot, $message);
+                foreach ($this->messages as $model) {
+                    $model = new $model();
+                    //Здесь может быть массив, текст или регулярное выражение
+                    if (MatcherFactory::create('string')->match($message->getText(), $model->signature)) {
+                        $model->make($bot, $message);
+                    }
                 }
             }
         }, function () {

@@ -1,11 +1,12 @@
 <?php
 
-namespace BotWrapper;
+namespace BotWrapper\Factories;
 
+use BotWrapper\Bot;
 use BotWrapper\Chaining\HandlerContainer;
-use BotWrapper\Chaining\CommandBot;
-use BotWrapper\Chaining\CallbackQueryBot;
-use BotWrapper\Chaining\OnBot;
+use BotWrapper\Chaining\Links\CommandBot;
+use BotWrapper\Chaining\Links\CallbackQueryBot;
+use BotWrapper\Chaining\Links\OnBot;
 
 class BotFactory
 {
@@ -47,15 +48,28 @@ class BotFactory
 
     public function create(): void
     {
-        $bot = \BotWrapper\Bot::getInstance();
-        $bot->init($this->token);
+        $this->botInit($this->token);
+        $this->registerContainer();
+        $this->botRun();
+    }
 
+    public function botInit($token)
+    {
+        $bot = Bot::getInstance();
+        $bot->init($this->token);
+    }
+
+    public function registerContainer()
+    {
         $handler = new HandlerContainer();
         $handler->addHandler(new CommandBot($this->commands));
         $handler->addHandler(new CallbackQueryBot($this->queries));
         $handler->addHandler(new OnBot($this->actions, $this->messages));
         $handler->execute();
+    }
 
+    public function botRun()
+    {
         Bot::getInstance()->get()->run();
     }
 }

@@ -5,15 +5,15 @@ namespace BotWrapper\Examples;
 use BotWrapper\Chaining\Command;
 use TelegramBot\Api\Types\Message;
 
-class HelloCommand extends Command
+class GoodbyeCommand extends Command
 {
-    public $signature = 'start';
+    public $signature = 'exit';
 
     public function command($bot)
     {
         return function (Message $message) use (/* @var BotApi $bot */ $bot) {
             $chatId = $message->getChat()->getId();
-            $bot->sendMessage($chatId, 'hello');
+            $bot->sendMessage($chatId, 'goodbye');
         };
     }
 }
