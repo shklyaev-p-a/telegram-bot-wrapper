@@ -25,7 +25,7 @@ class CallbackQueryBot implements BotInterface
         $bot->callbackQuery(function ($message) use (/* @var BotApi $bot */ $bot) {
             foreach ($this->queries as $query) {
                 $model = new $query();
-                if ($model->signature === $message->getData()) {
+                if (MatcherFactory::create($model->type)->match($message->getData(), $model->signature)) {
                     $model->make($bot, $message);
                 }
             }

@@ -29,14 +29,20 @@ class OnBot implements BotInterface
             $message = $update->getMessage();
 
             if (method_exists($message, 'getFrom')) {
-                //Продумать алгоритм lastAction
+                //idk difference between getForm and getText methods
             }
 
             if (method_exists($message, 'getText')) {
+                foreach ($this->actions as $model) {
+                    $model = new $model();
+                    if (MatcherFactory::create($model->type)->match($message->getText(), $model->signature)) {
+                        $model->make($bot, $message);
+                    }
+                }
+
                 foreach ($this->messages as $model) {
                     $model = new $model();
-                    //Здесь может быть массив, текст или регулярное выражение
-                    if (MatcherFactory::create('string')->match($message->getText(), $model->signature)) {
+                    if (MatcherFactory::create($model->type)->match($message->getText(), $model->signature)) {
                         $model->make($bot, $message);
                     }
                 }
