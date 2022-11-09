@@ -6,6 +6,7 @@ use BotWrapper\Bot;
 use BotWrapper\Chaining\HandlerContainer;
 use BotWrapper\Chaining\Links\CommandBot;
 use BotWrapper\Chaining\Links\CallbackQueryBot;
+use BotWrapper\Chaining\Links\Middleware;
 use BotWrapper\Chaining\Links\OnBot;
 
 class BotFactory
@@ -15,10 +16,17 @@ class BotFactory
     public $queries;
     public $actions;
     public $messages;
+    public $middlewares;
 
     public function token(string $token): BotFactory
     {
         $this->token = $token;
+        return $this;
+    }
+
+    public function middlewares($middlewares = []): BotFactory
+    {
+        $this->middlewares = $middlewares;
         return $this;
     }
 
@@ -62,6 +70,7 @@ class BotFactory
     public function registerContainer()
     {
         $handler = new HandlerContainer();
+        $handler->addHandler(new Middleware($this->middlewares));
         $handler->addHandler(new CommandBot($this->commands));
         $handler->addHandler(new CallbackQueryBot($this->queries));
         $handler->addHandler(new OnBot($this->actions, $this->messages));

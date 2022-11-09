@@ -21,9 +21,7 @@ class Bot
     /**
      * Bot constructor.
      */
-    private function __construct()
-    {
-    }
+    private function __construct(){}
 
     /**
      *
@@ -55,6 +53,15 @@ class Bot
         }
 
         $this->setBot($token);
+        $this->setDefaultData();
+    }
+
+    /**
+     * set default lastAction and can set other meta data
+     */
+    public function setDefaultData()
+    {
+        $this->bot->lastAction = '';
     }
 
     /**

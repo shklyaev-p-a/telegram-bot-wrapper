@@ -40,6 +40,19 @@ final class BotTest extends TestCase
     /**
      *
      */
+    public function testBotHasEmptyLatAction(): void
+    {
+        $bot = $this->createClientMock();
+
+        $bot->init(rand(5, 10));
+
+        $this->objectHasAttribute('lastAction', $bot);
+        $this->assertEquals('', $bot->lastAction);
+    }
+
+    /**
+     *
+     */
     public function testOverride(): void
     {
         $bot = $this->createClientMock();

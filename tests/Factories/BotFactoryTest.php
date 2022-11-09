@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use BotWrapper\BotFactory;
+use BotWrapper\Factories\BotFactory;
 
 final class BotFactoryTest extends TestCase
 {

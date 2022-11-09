@@ -21,7 +21,7 @@ class CommandBot implements BotInterface
     {
         $bot = $this->bot;
 
-        foreach ($this->commands as $command) {
+        foreach ($this->commands as $command){
             $command = new $command();
             $bot->command($command->signature, $command->command($bot));
         }

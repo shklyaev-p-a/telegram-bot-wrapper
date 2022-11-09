@@ -4,6 +4,7 @@ namespace BotWrapper\Examples;
 
 use BotWrapper\Chaining\Command;
 use TelegramBot\Api\Types\Message;
+use TelegramBot\Api\BotApi;
 
 class GoodbyeCommand extends Command
 {
