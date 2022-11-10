@@ -3,7 +3,7 @@
 namespace BotWrapper\Chaining;
 
 use BotWrapper\Chaining\Constants\CommandTypes;
-use TelegramBot\Api\BotApi;
+use TelegramBot\Api\Client;
 use TelegramBot\Api\Types\Message;
 
 abstract class CallbackQuery
@@ -11,7 +11,8 @@ abstract class CallbackQuery
     /** @var string CommandTypes $type */
     public $type = CommandTypes::TYPE_STRING;
 
+    /** @var string $signature */
     public $signature = '';
 
-    abstract function make(BotApi $bot, Message $message);
+    abstract function make(Client $bot, Message $message);
 }

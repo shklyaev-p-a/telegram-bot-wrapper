@@ -6,14 +6,17 @@ use BotWrapper\Bot;
 use BotWrapper\Chaining\Interfaces\BotInterface;
 use BotWrapper\Factories\MatcherFactory;
 use TelegramBot\Api\BotApi;
+use TelegramBot\Api\Client;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Update;
 
 class OnBot implements BotInterface
 {
-    /* @var Client $bot */
+    /** @var Client $bot */
     private $bot;
+    /** @var array $actions */
     private $actions = [];
+    /** @var array $messages */
     private $messages = [];
 
     public function __construct($actions = [], $messages = [])
@@ -25,9 +28,11 @@ class OnBot implements BotInterface
 
     public function execute()
     {
+        /** @var Client $bot */
         $bot = $this->bot;
 
         $bot->on(function (Update $update) use (/* @var BotApi $bot */ $bot) {
+            /** @var Message $message */
             $message = $update->getMessage();
 
             if (method_exists($message, 'getText')) {
@@ -44,7 +49,7 @@ class OnBot implements BotInterface
         });
     }
 
-    protected function actionsProcess(BotApi $bot, Message $message)
+    protected function actionsProcess(Client $bot, Message $message)
     {
         foreach ($this->actions as $model) {
             $model = new $model();
@@ -54,7 +59,7 @@ class OnBot implements BotInterface
         }
     }
 
-    protected function messagesProcess(BotApi $bot, Message $message)
+    protected function messagesProcess(Client $bot, Message $message)
     {
         foreach ($this->messages as $model) {
             $model = new $model();

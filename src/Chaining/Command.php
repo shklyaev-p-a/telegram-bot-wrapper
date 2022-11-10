@@ -2,11 +2,12 @@
 
 namespace BotWrapper\Chaining;
 
-use TelegramBot\Api\BotApi;
+use TelegramBot\Api\Client;
 
-abstract class Command{
-
+abstract class Command
+{
+    /** @var string $signature */
     public $signature = '';
 
-    abstract function command(BotApi $bot);
+    abstract function command(Client $bot);
 }

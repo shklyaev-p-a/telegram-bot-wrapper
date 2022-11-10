@@ -4,13 +4,15 @@ namespace BotWrapper\Chaining\Links;
 
 use BotWrapper\Bot;
 use BotWrapper\Chaining\Interfaces\BotInterface;
+use TelegramBot\Api\Client;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Update;
 
 class Middleware implements BotInterface
 {
-    /* @var Client $bot */
+    /** @var Client $bot */
     private $bot;
+    /** @var array $middlewares */
     private $middlewares = [];
 
     public function __construct($middlewares = [])
@@ -21,6 +23,7 @@ class Middleware implements BotInterface
 
     public function execute()
     {
+        /** @var Client $bot */
         $bot = $this->bot;
 
         $bot->on(function (Update $update) use (/* @var BotApi $bot */ $bot) {
