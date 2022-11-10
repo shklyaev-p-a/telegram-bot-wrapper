@@ -11,7 +11,7 @@ class CallbackQueryBot implements BotInterface
     /** @var Client $bot */
     private $bot;
     /** @var array  $queries*/
-    private $queries;
+    private $queries = [];
 
     public function __construct($queries = [])
     {

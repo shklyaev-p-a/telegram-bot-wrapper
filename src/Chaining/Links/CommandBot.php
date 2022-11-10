@@ -11,7 +11,7 @@ class CommandBot implements BotInterface
     /** @var Client $bot */
     private $bot;
     /** @var array $commands */
-    private $commands;
+    private $commands = [];
 
     public function __construct($commands = [])
     {
