@@ -17,10 +17,17 @@ class BotFactory
     public $actions;
     public $messages;
     public $middlewares;
+    public $data;
 
     public function token(string $token): BotFactory
     {
         $this->token = $token;
+        return $this;
+    }
+
+    public function bindData(array $data): BotFactory
+    {
+        $this->data = $data;
         return $this;
     }
 
@@ -56,15 +63,15 @@ class BotFactory
 
     public function create(): void
     {
-        $this->botInit($this->token);
+        $this->botInit();
         $this->registerContainer();
         $this->botRun();
     }
 
-    public function botInit($token)
+    public function botInit()
     {
         $bot = Bot::getInstance();
-        $bot->init($this->token);
+        $bot->init($this->token, $this->data);
     }
 
     public function registerContainer()

@@ -21,7 +21,9 @@ class Bot
     /**
      * Bot constructor.
      */
-    private function __construct(){}
+    private function __construct()
+    {
+    }
 
     /**
      *
@@ -43,31 +45,36 @@ class Bot
     }
 
     /**
-     * @param String $token
+     * @param string $token
+     * @param array $data
      * @throws BotAlreadyInitException
      */
-    public function init(String $token): void
+    public function init(string $token, array $data = []): void
     {
         if (!is_null($this->bot)) {
             throw new BotAlreadyInitException();
         }
 
         $this->setBot($token);
-        $this->setDefaultData();
+        $this->setDefaultData($data);
     }
 
     /**
+     * @param array $data
      * set default lastAction and can set other meta data
      */
-    public function setDefaultData()
+    public function setDefaultData(array $data = [])
     {
         $this->bot->lastAction = '';
+        foreach ($data as $dataName => $dataValue) {
+            $this->bot->{$dataName} = $dataValue;
+        }
     }
 
     /**
-     * @param String $token
+     * @param string $token
      */
-    public function override(String $token): void
+    public function override(string $token): void
     {
         $this->setBot($token);
     }
