@@ -60,14 +60,13 @@ class Bot
     }
 
     /**
-     * @param array $data
      * set default lastAction and can set other meta data
      */
-    public function setDefaultData(array $data = [])
+    public function setDefaultData($data = [])
     {
         $this->bot->lastAction = '';
         foreach ($data as $dataName => $dataValue) {
-            $this->bot->{$dataName} = $dataValue;
+            $this->addAdditionalProperty($dataName, $dataValue);
         }
     }
 

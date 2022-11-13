@@ -4,7 +4,8 @@
 require('vendor/autoload.php');
 
 (new \BotWrapper\Factories\BotFactory())->token('your token')
-    ->middlewares([])
+    ->bindData([name => val]) //forward data to properties
+    ->middlewares([]) 
     ->commands([
         BotWrapper\Examples\HelloCommand::class,
         \BotWrapper\Examples\GoodbyeCommand::class
