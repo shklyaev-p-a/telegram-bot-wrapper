@@ -1,6 +1,6 @@
 {
   "name": "shklyaev-p-a/telegram-bot-wrapper",
-  "description": "get access to mailbox via imap for reading and flaggind mail message with any format decode",
+  "description": "simple wrapper for telegram-bot/api library",
   "type": "library",
   "license": "MIT",
   "minimum-stability": "dev",
