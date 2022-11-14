@@ -4,29 +4,29 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8dee4afd6666224f58d7253c374cbf44",
+    "content-hash": "c68d4aedcd0b4c7bd4cc0bc85eee8c75",
     "packages": [
         {
             "name": "telegram-bot/api",
-            "version": "3.0.0.x-dev",
+            "version": "v2.3.24",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TelegramBot/Api.git",
-                "reference": "0d8774ecbe2af7446bf4fb28d62c4ec56d502e00"
+                "reference": "579f64d0ffe7f21d1f61cb8734e297686b286bf7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TelegramBot/Api/zipball/0d8774ecbe2af7446bf4fb28d62c4ec56d502e00",
-                "reference": "0d8774ecbe2af7446bf4fb28d62c4ec56d502e00",
+                "url": "https://api.github.com/repos/TelegramBot/Api/zipball/579f64d0ffe7f21d1f61cb8734e297686b286bf7",
+                "reference": "579f64d0ffe7f21d1f61cb8734e297686b286bf7",
                 "shasum": ""
             },
             "require": {
                 "ext-curl": "*",
-                "ext-json": "*",
-                "php": "^7.2"
+                "php": ">=5.5.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^8.5",
+                "codeception/codeception": "*",
+                "phpunit/phpunit": "~4.0",
                 "squizlabs/php_codesniffer": "2.*"
             },
             "type": "library",
@@ -62,9 +62,9 @@
             ],
             "support": {
                 "issues": "https://github.com/TelegramBot/Api/issues",
-                "source": "https://github.com/TelegramBot/Api/tree/3.0.0"
+                "source": "https://github.com/TelegramBot/Api/tree/v2.3.24"
             },
-            "time": "2019-12-18T05:14:35+00:00"
+            "time": "2021-12-06T13:05:34+00:00"
         }
     ],
     "packages-dev": [
@@ -1851,9 +1851,7 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": {
-        "telegram-bot/api": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],

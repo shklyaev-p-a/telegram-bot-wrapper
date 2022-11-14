@@ -16,6 +16,6 @@
     "phpunit/phpunit": "9"
   },
   "require": {
-    "telegram-bot/api": "3.0.0.x-dev"
+    "telegram-bot/api": "v2.3.24"
   }
 }
