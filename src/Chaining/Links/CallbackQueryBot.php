@@ -4,7 +4,7 @@ namespace BotWrapper\Chaining\Links;
 
 use BotWrapper\Bot;
 use BotWrapper\Chaining\Interfaces\BotInterface;
-use TelegramBot\Api\Types\Message;
+use TelegramBot\Api\Types\CallbackQuery;
 
 class CallbackQueryBot implements BotInterface
 {
@@ -24,10 +24,10 @@ class CallbackQueryBot implements BotInterface
         /* @var Client $bot */
         $bot = $this->bot;
 
-        $bot->callbackQuery(function (Message $message) use (/* @var BotApi $bot */ $bot) {
+        $bot->callbackQuery(function (CallbackQuery $message) use (/* @var BotApi $bot */ $bot) {
             foreach ($this->queries as $query) {
                 $model = new $query();
-                if (MatcherFactory::create($model->type)->match($message->getData(), $model->signature)) {
+                if (MatcherFactory::create($model->type)->match($model->signature, $message->getData())) {
                     $model->make($bot, $message);
                 }
             }

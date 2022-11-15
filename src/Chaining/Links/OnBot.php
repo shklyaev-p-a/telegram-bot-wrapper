@@ -53,7 +53,7 @@ class OnBot implements BotInterface
     {
         foreach ($this->actions as $model) {
             $model = new $model();
-            if (MatcherFactory::create($model->type)->match($bot->lastAction, $model->signature)) {
+            if (MatcherFactory::create($model->type)->match($model->signature, $bot->lastAction)) {
                 $model->make($bot, $message);
             }
         }
@@ -63,7 +63,7 @@ class OnBot implements BotInterface
     {
         foreach ($this->messages as $model) {
             $model = new $model();
-            if (MatcherFactory::create($model->type)->match($message->getText(), $model->signature)) {
+            if (MatcherFactory::create($model->type)->match($model->signature, $message->getText())) {
                 $model->make($bot, $message);
             }
         }

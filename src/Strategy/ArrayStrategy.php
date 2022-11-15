@@ -6,8 +6,8 @@ use BotWrapper\Strategy\Interfaces\MatcherInterface;
 
 class ArrayStrategy implements MatcherInterface
 {
-    public function match($needle, $data): bool
+    public function match($array, $data): bool
     {
-        return in_array($needle, $data);
+        return in_array($data, $array);
     }
 }
