@@ -12,12 +12,12 @@ use BotWrapper\Chaining\Links\OnBot;
 class BotFactory
 {
     public $token;
-    public $commands;
-    public $queries;
-    public $actions;
-    public $messages;
-    public $middlewares;
-    public $data;
+    public $commands = [];
+    public $queries = [];
+    public $actions = [];
+    public $messages = [];
+    public $middlewares = [];
+    public $data = [];
 
     public function token(string $token): BotFactory
     {
