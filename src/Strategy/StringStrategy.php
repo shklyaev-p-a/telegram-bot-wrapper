@@ -6,8 +6,8 @@ use BotWrapper\Strategy\Interfaces\MatcherInterface;
 
 class StringStrategy implements MatcherInterface
 {
-    public function match($signature, $data): bool
+    public function match($signatureString, $needle): bool
     {
-        return $signature === $data;
+        return $signatureString === $needle;
     }
 }

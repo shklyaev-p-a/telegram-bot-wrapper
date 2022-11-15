@@ -14,8 +14,8 @@ class Matcher
         $this->matcher = $matcher;
     }
 
-    public function match($needle, $data)
+    public function match($signature, $needle)
     {
-        return (bool)$this->matcher->match($needle, $data);
+        return (bool)$this->matcher->match($signature, $needle);
     }
 }

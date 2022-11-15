@@ -4,6 +4,7 @@ namespace BotWrapper\Chaining\Links;
 
 use BotWrapper\Bot;
 use BotWrapper\Chaining\Interfaces\BotInterface;
+use BotWrapper\Factories\MatcherFactory;
 use TelegramBot\Api\Types\CallbackQuery;
 
 class CallbackQueryBot implements BotInterface

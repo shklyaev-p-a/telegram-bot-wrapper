@@ -6,8 +6,8 @@ use BotWrapper\Strategy\Interfaces\MatcherInterface;
 
 class RegExpStrategy implements MatcherInterface
 {
-    public function match($pattern, $data): bool
+    public function match($signaturePattern, $needle): bool
     {
-        return preg_match($pattern, $data);
+        return preg_match($signaturePattern, $needle);
     }
 }
