@@ -78,8 +78,8 @@ class BotFactory
     {
         $handler = new HandlerContainer();
         $handler->addHandler(new Middleware($this->middlewares));
+        $handler->addHandler(new CallbackQueryBot($this->queries, $this->middlewares));
         $handler->addHandler(new CommandBot($this->commands));
-        $handler->addHandler(new CallbackQueryBot($this->queries));
         $handler->addHandler(new OnBot($this->actions, $this->messages));
         $handler->execute();
     }
