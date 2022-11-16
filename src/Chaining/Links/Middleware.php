@@ -7,6 +7,7 @@ use BotWrapper\Chaining\Interfaces\BotInterface;
 use TelegramBot\Api\Client;
 use TelegramBot\Api\Types\Message;
 use TelegramBot\Api\Types\Update;
+use TelegramBot\Api\BotApi;
 
 class Middleware implements BotInterface
 {
