@@ -7,5 +7,5 @@ use TelegramBot\Api\Types\Message;
 
 abstract class Middleware
 {
-    abstract function make(Client $bot, Message $message);
+    abstract function make(Client $bot, Message $message = null);
 }

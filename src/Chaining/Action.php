@@ -14,5 +14,5 @@ abstract class Action
     /** @var string $signature */
     public $signature = '';
 
-    abstract function make(Client $bot, MessageType $message);
+    abstract function make(Client $bot, MessageType $message = null);
 }

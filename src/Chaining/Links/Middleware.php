@@ -30,13 +30,9 @@ class Middleware implements BotInterface
             /** @var Message $message */
             $message = $update->getMessage();
 
-            //What do if we not has message ?????
-            //message var is chat message from user or keyboard
-            if ($message) {
-                foreach ($this->middlewares as $middleware) {
-                    $middleware = new $middleware();
-                    $middleware->make($bot, $message);
-                }
+            foreach ($this->middlewares as $middleware) {
+                $middleware = new $middleware();
+                $middleware->make($bot, $message);
             }
         }, function () {
             return true;
