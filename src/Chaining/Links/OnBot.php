@@ -35,12 +35,12 @@ class OnBot implements BotInterface
             /** @var Message $message */
             $message = $update->getMessage();
 
-            if (method_exists($message, 'getText')) {
+            if ($message && method_exists($message, 'getText')) {
                 $this->actionsProcess($bot, $message);
                 $this->messagesProcess($bot, $message);
             }
 
-            if (method_exists($message, 'getFrom')) {
+            if ($message && method_exists($message, 'getFrom')) {
                 //idk difference between getForm and getText methods
             }
 
